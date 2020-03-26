@@ -3,10 +3,11 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 50;
+	objectVersion = 51;
 	objects = {
 
 /* Begin PBXBuildFile section */
+		49D1E1930B013326B94CBD05 /* libPods-GitHubDemo.a in Frameworks */ = {isa = PBXBuildFile; fileRef = B173BECA988824DF47E4393F /* libPods-GitHubDemo.a */; };
 		A312F62D2429AD5600D95943 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = A312F62C2429AD5600D95943 /* AppDelegate.m */; };
 		A312F6302429AD5600D95943 /* SceneDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = A312F62F2429AD5600D95943 /* SceneDelegate.m */; };
 		A312F6332429AD5600D95943 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A312F6322429AD5600D95943 /* ViewController.m */; };
@@ -16,9 +17,12 @@
 		A312F6462429B2D400D95943 /* RootViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A312F6452429B2D400D95943 /* RootViewController.m */; };
 		A312F6492429D55E00D95943 /* TableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A312F6482429D55E00D95943 /* TableViewController.m */; };
 		A312F64C2429E22E00D95943 /* SecondViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A312F64B2429E22E00D95943 /* SecondViewController.m */; };
+		A3F2D7CB242C8A8100FEEF2F /* MyTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = A3F2D7CA242C8A8100FEEF2F /* MyTableViewCell.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		5A8B0B5FDFCE684F89E1F12D /* Pods-GitHubDemo.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-GitHubDemo.release.xcconfig"; path = "Target Support Files/Pods-GitHubDemo/Pods-GitHubDemo.release.xcconfig"; sourceTree = "<group>"; };
+		66EEAA4A8188FC8689AE14F4 /* Pods-GitHubDemo.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-GitHubDemo.debug.xcconfig"; path = "Target Support Files/Pods-GitHubDemo/Pods-GitHubDemo.debug.xcconfig"; sourceTree = "<group>"; };
 		A312F6282429AD5600D95943 /* GitHubDemo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = GitHubDemo.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		A312F62B2429AD5600D95943 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		A312F62C2429AD5600D95943 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
@@ -36,6 +40,9 @@
 		A312F6482429D55E00D95943 /* TableViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TableViewController.m; sourceTree = "<group>"; };
 		A312F64A2429E22E00D95943 /* SecondViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SecondViewController.h; sourceTree = "<group>"; };
 		A312F64B2429E22E00D95943 /* SecondViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SecondViewController.m; sourceTree = "<group>"; };
+		A3F2D7C9242C8A8100FEEF2F /* MyTableViewCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MyTableViewCell.h; sourceTree = "<group>"; };
+		A3F2D7CA242C8A8100FEEF2F /* MyTableViewCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MyTableViewCell.m; sourceTree = "<group>"; };
+		B173BECA988824DF47E4393F /* libPods-GitHubDemo.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-GitHubDemo.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -43,17 +50,37 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				49D1E1930B013326B94CBD05 /* libPods-GitHubDemo.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		51EAD5FCAE1020F00B8372C6 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				B173BECA988824DF47E4393F /* libPods-GitHubDemo.a */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		7E9EDB58852088C41DF67803 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				66EEAA4A8188FC8689AE14F4 /* Pods-GitHubDemo.debug.xcconfig */,
+				5A8B0B5FDFCE684F89E1F12D /* Pods-GitHubDemo.release.xcconfig */,
+			);
+			path = Pods;
+			sourceTree = "<group>";
+		};
 		A312F61F2429AD5600D95943 = {
 			isa = PBXGroup;
 			children = (
 				A312F62A2429AD5600D95943 /* GitHubDemo */,
 				A312F6292429AD5600D95943 /* Products */,
+				7E9EDB58852088C41DF67803 /* Pods */,
+				51EAD5FCAE1020F00B8372C6 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -76,6 +103,8 @@
 				A312F6482429D55E00D95943 /* TableViewController.m */,
 				A312F64A2429E22E00D95943 /* SecondViewController.h */,
 				A312F64B2429E22E00D95943 /* SecondViewController.m */,
+				A3F2D7C9242C8A8100FEEF2F /* MyTableViewCell.h */,
+				A3F2D7CA242C8A8100FEEF2F /* MyTableViewCell.m */,
 				A312F62E2429AD5600D95943 /* SceneDelegate.h */,
 				A312F62F2429AD5600D95943 /* SceneDelegate.m */,
 				A312F6312429AD5600D95943 /* ViewController.h */,
@@ -95,9 +124,11 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = A312F6412429AD5700D95943 /* Build configuration list for PBXNativeTarget "GitHubDemo" */;
 			buildPhases = (
+				72AC85EBDDDE12AFABA34C9C /* [CP] Check Pods Manifest.lock */,
 				A312F6242429AD5600D95943 /* Sources */,
 				A312F6252429AD5600D95943 /* Frameworks */,
 				A312F6262429AD5600D95943 /* Resources */,
+				C50380292F24B737F473A70B /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -152,6 +183,48 @@
 		};
 /* End PBXResourcesBuildPhase section */
 
+/* Begin PBXShellScriptBuildPhase section */
+		72AC85EBDDDE12AFABA34C9C /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-GitHubDemo-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		C50380292F24B737F473A70B /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-GitHubDemo/Pods-GitHubDemo-resources-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Copy Pods Resources";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-GitHubDemo/Pods-GitHubDemo-resources-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-GitHubDemo/Pods-GitHubDemo-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
+
 /* Begin PBXSourcesBuildPhase section */
 		A312F6242429AD5600D95943 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
@@ -162,6 +235,7 @@
 				A312F62D2429AD5600D95943 /* AppDelegate.m in Sources */,
 				A312F64C2429E22E00D95943 /* SecondViewController.m in Sources */,
 				A312F63E2429AD5700D95943 /* main.m in Sources */,
+				A3F2D7CB242C8A8100FEEF2F /* MyTableViewCell.m in Sources */,
 				A312F6302429AD5600D95943 /* SceneDelegate.m in Sources */,
 				A312F6462429B2D400D95943 /* RootViewController.m in Sources */,
 			);
@@ -293,6 +367,7 @@
 		};
 		A312F6422429AD5700D95943 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 66EEAA4A8188FC8689AE14F4 /* Pods-GitHubDemo.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
@@ -310,6 +385,7 @@
 		};
 		A312F6432429AD5700D95943 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 5A8B0B5FDFCE684F89E1F12D /* Pods-GitHubDemo.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
