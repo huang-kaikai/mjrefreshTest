@@ -12,7 +12,8 @@
 @interface SecondViewController () <UITableViewDelegate, UITableViewDataSource>
 
 @property (strong,nonatomic) UITableView *tableView;
-@property (strong,nonatomic) NSArray *content;
+@property (strong,nonatomic) NSArray *showLabelNumber;
+@property (strong,nonatomic) NSArray *titleText;
 
 @end
 
@@ -24,7 +25,8 @@
     //設定分頁title
     self.title = @"客製化cell";
     //設定NSArray資料
-    self.content = @[@"Monday", @"Tuesday", @"Wednesday", @"Thursday", @"Friday", @"Saturday", @"Sunday"];
+    self.showLabelNumber = @[@"NO.1", @"NO.2", @"NO.3", @"NO.4", @"NO.5", @"NO.6", @"NO.7"];
+    self.titleText = @[@"抖音沙發哥", @"我是大美女", @"誰能比我正", @"iOS Swift", @"iOS OC", @"MacBook Air", @"MacBook Pro"];
     //畫面顯示TableView
     [self myTableView];
     //在DidLoad函数里对该Cell进行注册
@@ -48,7 +50,7 @@
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    return _content.count;
+    return _showLabelNumber.count;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
@@ -57,10 +59,12 @@
 
     cell = [tableView dequeueReusableCellWithIdentifier:@"myCell"forIndexPath:indexPath]; //2
 
-    cell.label1.text = @"NO.1";
+    //cell.label1.text = @"NO.1";
+    cell.label1.text = [_showLabelNumber objectAtIndex:indexPath.row];
     cell.label1.textColor = [UIColor redColor];
     
-    cell.label2.text = @"抖音沙發哥";
+    //cell.label2.text = @"抖音沙發哥";
+    cell.label2.text = [_titleText objectAtIndex:indexPath.row];
     cell.label2.textColor = [UIColor blueColor];
     
     [cell.icon1 setTitle:@"Press" forState:UIControlStateNormal];
@@ -68,8 +72,6 @@
     [cell.icon1 setBackgroundImage:[UIImage imageNamed:@"金币"] forState:UIControlStateNormal];
     
     cell.backgroundColor = [UIColor whiteColor];
-    
-    cell.textLabel.text = [_content objectAtIndex:indexPath.row];
 
     return cell;    //3
 }
