@@ -12,8 +12,8 @@
 @interface SecondViewController () <UITableViewDelegate, UITableViewDataSource>
 
 @property (strong,nonatomic) UITableView *tableView;
-@property (strong,nonatomic) NSArray *showLabelNumber;
-@property (strong,nonatomic) NSArray *titleText;
+//建立一個通用數據源
+@property (strong,nonatomic) NSMutableArray *dataSource;
 
 @end
 
@@ -23,10 +23,30 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     //設定分頁title
-    self.title = @"客製化cell";
+    self.title = @"這是一個客製化cell";
     //設定NSArray資料
-    self.showLabelNumber = @[@"NO.1", @"NO.2", @"NO.3", @"NO.4", @"NO.5", @"NO.6", @"NO.7"];
-    self.titleText = @[@"抖音沙發哥", @"我是大美女", @"誰能比我正", @"iOS Swift", @"iOS OC", @"MacBook Air", @"MacBook Pro"];
+    //self.showLabelNumber = @[@"NO.1", @"NO.2", @"NO.3", @"NO.4", @"NO.5", @"NO.6", @"NO.7"];
+    //self.titleText = @[@"抖音沙發哥", @"我是大美女", @"誰能比我正", @"iOS Swift", @"iOS OC", @"MacBook Air", @"MacBook Pro"];
+    
+    #pragma mark - 創建可變數組，初始化
+    self.dataSource = [NSMutableArray array]; //瞭解這邊這樣使用array的用法原理
+    
+    NSArray *randomArray = @[@"抖音沙發哥", @"我是大美女", @"誰能比我正", @"iOS Swift", @"iOS OC", @"MacBook Air", @"MacBook Pro"];
+    #pragma mark - 創建隨機數據源
+    for (int i = 0; i<100; i++) {
+        NSString *num = [NSString stringWithFormat:@"NO.%d", i+1];
+        
+         #pragma mark - 獲取隨機數
+        int index = (arc4random() % randomArray.count); //這個用法多加練習理解
+         #pragma mark - 創建隨機數據源，randomArray隨機抽取名字付值
+        NSString *name = [NSString stringWithFormat:@"我是%@", randomArray[index]];
+        
+        NSDictionary *dict = @{
+            @"myNumber":num,@"myName":name
+        };
+        [self.dataSource addObject:dict]; //這個用法再多加練習理解
+    }
+    
     //畫面顯示TableView
     [self myTableView];
     //在DidLoad函数里对该Cell进行注册
@@ -50,7 +70,8 @@
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    return _showLabelNumber.count;
+    //從dataSource讀取行數
+    return self.dataSource.count;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
@@ -58,13 +79,12 @@
     MyTableViewCell *cell = nil; //1
 
     cell = [tableView dequeueReusableCellWithIdentifier:@"myCell"forIndexPath:indexPath]; //2
-
-    //cell.label1.text = @"NO.1";
-    cell.label1.text = [_showLabelNumber objectAtIndex:indexPath.row];
+    //從dataSource讀取模型數據
+    NSDictionary *dict = self.dataSource[indexPath.row];
+    cell.label1.text = dict[@"myNumber"];
     cell.label1.textColor = [UIColor redColor];
     
-    //cell.label2.text = @"抖音沙發哥";
-    cell.label2.text = [_titleText objectAtIndex:indexPath.row];
+    cell.label2.text = dict[@"myName"];
     cell.label2.textColor = [UIColor blueColor];
     
     [cell.icon1 setTitle:@"Press" forState:UIControlStateNormal];

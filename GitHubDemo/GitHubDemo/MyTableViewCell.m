@@ -35,7 +35,7 @@
      //设置每一个的位置
     _icon1.frame = CGRectMake(300, 0, 55, 50);
 
-    _label1.frame = CGRectMake(10, 0, 50, 50);
+    _label1.frame = CGRectMake(10, 0, 100, 50);
 
     _label2.frame = CGRectMake(100, 0, 200, 50);
     
