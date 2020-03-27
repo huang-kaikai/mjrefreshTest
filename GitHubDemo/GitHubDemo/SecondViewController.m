@@ -8,6 +8,7 @@
 
 #import "SecondViewController.h"
 #import "MyTableViewCell.h"
+#import <MJRefresh.h>
 
 @interface SecondViewController () <UITableViewDelegate, UITableViewDataSource>
 
@@ -33,7 +34,7 @@
     
     NSArray *randomArray = @[@"抖音沙發哥", @"我是大美女", @"誰能比我正", @"iOS Swift", @"iOS OC", @"MacBook Air", @"MacBook Pro"];
     #pragma mark - 創建隨機數據源
-    for (int i = 0; i<100; i++) {
+    for (int i = 0; i<10; i++) {
         NSString *num = [NSString stringWithFormat:@"NO.%d", i+1];
         
          #pragma mark - 獲取隨機數
@@ -51,6 +52,30 @@
     [self myTableView];
     //在DidLoad函数里对该Cell进行注册
     [self.tableView registerClass:[MyTableViewCell class] forCellReuseIdentifier:@"myCell"];
+    
+    #pragma mark-頁面更新
+    __unsafe_unretained UITableView *tableView = self.tableView;
+    
+    // 下拉刷新
+    tableView.mj_header= [MJRefreshNormalHeader headerWithRefreshingBlock:^{
+        // 模拟延迟加载数据，因此2秒后才调用（真实开发中，可以移除这段gcd代码）
+        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(2.0 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+            // 结束刷新
+            [tableView.mj_header endRefreshing];
+        });
+    }];
+    
+    // 设置自动切换透明度(在导航栏下面自动隐藏)
+    tableView.mj_header.automaticallyChangeAlpha = YES;
+    
+    // 上拉刷新
+    tableView.mj_footer = [MJRefreshBackNormalFooter footerWithRefreshingBlock:^{
+        // 模拟延迟加载数据，因此2秒后才调用（真实开发中，可以移除这段gcd代码）
+        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(2.0 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+            // 结束刷新
+            [tableView.mj_footer endRefreshing];
+        });
+    }];
     
 }
 
@@ -112,7 +137,18 @@
 }
 //點擊Row進行事件
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-    //do something
+    //點擊動畫
+    [tableView deselectRowAtIndexPath:indexPath animated:YES];
+    //點擊後呼叫openNew方法開啟新VC
+    [self openNewVC];
+}
+
+#pragma mark - 點擊cell開啟新VC
+- (void)openNewVC {
+    UIViewController *vc = [UIViewController new];
+    vc.view.backgroundColor = [UIColor whiteColor];
+    vc.title = @"cell資料";
+    [self.navigationController pushViewController:vc animated:YES]; //這邊自己就會有navigationController？
 }
 
 @end

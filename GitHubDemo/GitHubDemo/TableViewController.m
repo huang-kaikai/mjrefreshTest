@@ -86,7 +86,13 @@
 }
 
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
+    [tableView deselectRowAtIndexPath:indexPath animated:YES];
     NSLog(@"Title of cell %@", [_content objectAtIndex:indexPath.row]);
+    
+    UIViewController *vc = [UIViewController new];
+    vc.view.backgroundColor = [UIColor whiteColor];
+    vc.title = [NSString stringWithFormat:@"%@", [_content objectAtIndex:indexPath.row]];
+    [self.navigationController pushViewController:vc animated:YES];
 }
 
 
