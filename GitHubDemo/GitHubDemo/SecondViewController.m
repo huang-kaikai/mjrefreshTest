@@ -10,11 +10,17 @@
 #import "MyTableViewCell.h"
 #import <MJRefresh.h>
 
+//随机数据
+static const CGFloat MJDuration = 2.0;
+#define MJRandomData [NSString stringWithFormat:@"随机数据---%d", arc4random_uniform(1000000)]
+
 @interface SecondViewController () <UITableViewDelegate, UITableViewDataSource>
 
 @property (strong,nonatomic) UITableView *tableView;
 //建立一個通用數據源
 @property (strong,nonatomic) NSMutableArray *dataSource;
+/** 用来显示的假数据 */
+@property (strong, nonatomic) NSMutableArray *data;
 
 @end
 
@@ -34,7 +40,7 @@
     
     NSArray *randomArray = @[@"抖音沙發哥", @"我是大美女", @"誰能比我正", @"iOS Swift", @"iOS OC", @"MacBook Air", @"MacBook Pro"];
     #pragma mark - 創建隨機數據源
-    for (int i = 0; i<10; i++) {
+    for (int i = 0; i<100; i++) {
         NSString *num = [NSString stringWithFormat:@"NO.%d", i+1];
         
          #pragma mark - 獲取隨機數
@@ -53,29 +59,31 @@
     //在DidLoad函数里对该Cell进行注册
     [self.tableView registerClass:[MyTableViewCell class] forCellReuseIdentifier:@"myCell"];
     
-    #pragma mark-頁面更新
-    __unsafe_unretained UITableView *tableView = self.tableView;
+    [self example01];
     
-    // 下拉刷新
-    tableView.mj_header= [MJRefreshNormalHeader headerWithRefreshingBlock:^{
-        // 模拟延迟加载数据，因此2秒后才调用（真实开发中，可以移除这段gcd代码）
-        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(2.0 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-            // 结束刷新
-            [tableView.mj_header endRefreshing];
-        });
-    }];
-    
-    // 设置自动切换透明度(在导航栏下面自动隐藏)
-    tableView.mj_header.automaticallyChangeAlpha = YES;
-    
-    // 上拉刷新
-    tableView.mj_footer = [MJRefreshBackNormalFooter footerWithRefreshingBlock:^{
-        // 模拟延迟加载数据，因此2秒后才调用（真实开发中，可以移除这段gcd代码）
-        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(2.0 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-            // 结束刷新
-            [tableView.mj_footer endRefreshing];
-        });
-    }];
+//    #pragma mark-頁面更新
+//    __unsafe_unretained UITableView *tableView = self.tableView;
+//
+//    // 下拉刷新
+//    tableView.mj_header= [MJRefreshNormalHeader headerWithRefreshingBlock:^{
+//        // 模拟延迟加载数据，因此2秒后才调用（真实开发中，可以移除这段gcd代码）
+//        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(2.0 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+//            // 结束刷新
+//            [tableView.mj_header endRefreshing];
+//        });
+//    }];
+//
+//    // 设置自动切换透明度(在导航栏下面自动隐藏)
+//    tableView.mj_header.automaticallyChangeAlpha = YES;
+//
+//    // 上拉刷新
+//    tableView.mj_footer = [MJRefreshBackNormalFooter footerWithRefreshingBlock:^{
+//        // 模拟延迟加载数据，因此2秒后才调用（真实开发中，可以移除这段gcd代码）
+//        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(2.0 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+//            // 结束刷新
+//            [tableView.mj_footer endRefreshing];
+//        });
+//    }];
     
 }
 
@@ -96,7 +104,8 @@
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     //從dataSource讀取行數
-    return self.dataSource.count;
+    //return self.dataSource.count;
+    return self.data.count;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
@@ -149,6 +158,52 @@
     vc.view.backgroundColor = [UIColor whiteColor];
     vc.title = @"cell資料";
     [self.navigationController pushViewController:vc animated:YES]; //這邊自己就會有navigationController？
+}
+
+#pragma mark - 示例代码
+#pragma mark UITableView + 下拉刷新 默认
+- (void)example01
+{
+    __weak __typeof(self) weakSelf = self;
+    
+    // 设置回调（一旦进入刷新状态就会调用这个refreshingBlock）
+    self.tableView.mj_header = [MJRefreshNormalHeader headerWithRefreshingBlock:^{
+        [weakSelf loadNewData];
+    }];
+    
+    // 马上进入刷新状态
+    //[self.tableView.mj_header beginRefreshing];
+}
+
+#pragma mark - 数据处理相关
+#pragma mark 下拉刷新数据
+- (void)loadNewData
+{
+    // 1.添加假数据
+    for (int i = 0; i<5; i++) {
+        [self.data insertObject:MJRandomData atIndex:0];
+    }
+    
+    // 2.模拟2秒后刷新表格UI（真实开发中，可以移除这段gcd代码）
+    __weak UITableView *tableView = self.tableView;
+    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(MJDuration * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+        // 刷新表格
+        [tableView reloadData];
+        
+        // 拿到当前的下拉刷新控件，结束刷新状态
+        [tableView.mj_header endRefreshing];
+    });
+}
+
+- (NSMutableArray *)data
+{
+    if (!_data) {
+        self.data = [NSMutableArray array];
+        for (int i = 0; i<5; i++) {
+            [self.data addObject:MJRandomData];
+        }
+    }
+    return _data;
 }
 
 @end
